@@ -37,19 +37,62 @@
         data-bs-toggle="collapse" 
         data-bs-target="#navbarButtons"
         >
-        
             <span class = "navbar-toggler-icon"></span>
         </button>
 
         <div class = "collapse navbar-collapse" id="navbarButtons">
             <div class = "navbar-nav">
-                <a class="nav-item nav-link" id="login" href="/login">LOGIN</a>
-                <a class="nav-item nav-link" id="sign_up" href="/sign-up">SIGN-UP</a>
-                <a class="nav-item nav-link" id="logout" href="/logout">LOGOUT</a>
-                <a class="nav-item nav-link" id="home" href="/">HOME</a>
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" id="home" href="/">HOME</a>
+                    <a class="nav-item nav-link" id="logout" href="/logout">LOGOUT</a>
+                {% else %}
+                    <a class="nav-item nav-link" id="login" href="/login">LOGIN</a>
+                    <a class="nav-item nav-link" id="sign_up" href="/sign-up">SIGN-UP</a>
+                {% endif %}
             </div>
         </div>
     </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {%if category == 'error'%}
+                    <div class = "alert alert-danger alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button 
+                        type="button" 
+                        class="btn-close" 
+                        data-bs-dismiss="alert">
+                        </button>
+                    </div>
+                {% endif %}
+                {%if category == 'success'%}
+                    <div class = "alert alert-success alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button 
+                        type="button" 
+                        class="btn-close" 
+                        data-bs-dismiss="alert">
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+
+    <div class="conteiner">
+        {% block content %} {% endblock %}
+    </div>
+
+
+
+
+
+
+
+
 
     <script 
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
@@ -74,7 +117,7 @@
 
     <script
         type="text/javascript"
-        scr="{{ url_for('static', filename='index.js') }}"
+        src="{{ url_for('static', filename='index.js') }}"
     ></script>
 
 </body>
