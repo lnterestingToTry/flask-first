@@ -1,0 +1,14 @@
+psql
+sudo su - postgres -c "psql"
+create database mydb;
+create user myuser with encrypted password 'mypass';
+grant all privileges on database mydb to myuser;
+\du
+\l
+\q
+\c database_name
+\dt
+\d table_name
+
+sudo service postgresql start
+sudo service postgresql stop
