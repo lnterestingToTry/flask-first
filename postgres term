@@ -12,3 +12,8 @@ grant all privileges on database mydb to myuser;
 
 sudo service postgresql start
 sudo service postgresql stop
+
+GRANT ALL PRIVILEGES ON DATABASE thedatabase TO app_user;
+GRANT ALL PRIVILEGES ON SCHEMA schema_name TO app_user;
+GRANT ALL PRIVILEGES ON TABLE schema_name.table_name TO app_user;
+GRANT ALL PRIVILEGES ON SEQUENCE schema_name.sequence_name TO app_user;

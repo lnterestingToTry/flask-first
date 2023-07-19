@@ -2,10 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
+import os
+
+db_connect = os.getenv("DATABASE_URL")
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/flask_first'
+app.config['SQLALCHEMY_DATABASE_URI'] = db_connect#'postgresql://flask_first_user:strongpassword@127.0.0.1:5432/flask_first'
 
 db = SQLAlchemy(app)
 
